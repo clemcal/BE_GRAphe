@@ -12,12 +12,13 @@ public class Label implements Comparable<Label>{
 	
 	
 	
-	public Label( int som, boolean mar, double cost, Arc per) {
+	public Label( int som, boolean mar, double cost, Arc per, boolean inT) {
 		this.sommet = som ;
 		this.marque = mar ;
 		
 		this.cout = cost;
 		this.pere = per ;
+		this.inTas = inT ; 
 		
 	}
 	public void setCost(double x) {

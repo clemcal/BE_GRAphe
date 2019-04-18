@@ -12,6 +12,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     @Override
     protected ShortestPathSolution doRun() {
+    	boolean trouve = false ; 
         ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
         ArrayList<Label> tabLabel = new ArrayList<Label>(); 
@@ -28,8 +29,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         
         
         //itérations 
-        while (!(tas.isEmpty()) || data.getDestination().getId() ) {
-        	
+        while (!(tas.isEmpty()) || (!(trouve))  ) {
+        	deleteMin(Tas) ; 
         }
         
         
