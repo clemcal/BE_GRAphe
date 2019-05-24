@@ -32,6 +32,11 @@ public class Label implements Comparable<Label>{
 	public void setinTas(boolean w ) {
 		this.inTas = w ; 
 	}
+	
+	public void setPere(Arc a) {
+		this.pere = a ;
+	}
+	
 	public boolean getMark() {
 		return this.marque ;
 	}
@@ -43,17 +48,32 @@ public class Label implements Comparable<Label>{
 	public double getCost() {
 		return this.cout ;
 	}
+	public int getSom() {
+		return this.sommet ; 
+	}
+	
+	public Arc getPere() {
+		return this.pere ;
+	}
+	
+	public double getTotalCost() {
+		return this.cout ; 
+	}
+	
+	
 	//Si le cout de L1 est plus grand que L2 on renvoit TRUE
 	public int compareTo (Label L1) { 
-		if ((this.getCost()-L1.getCost())<0){
+		if ((this.getTotalCost()-L1.getTotalCost())<0){
 			return -1 ; 
 		}
-		else if  ((this.getCost()-L1.getCost())==0) {
+		else if  ((this.getTotalCost()-L1.getTotalCost())==0) {
 			return 0 ; 
 		}
 		else {
 			return 1 ; 
 		}
 	}
+	
+	
 
 }

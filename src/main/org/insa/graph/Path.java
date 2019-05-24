@@ -293,7 +293,7 @@ public class Path {
      */
     public boolean isValid() {
     	if (isEmpty()) {
-    		return true ;  
+    		return false ;  
     		}
     	else if (size()==1) {
     		return true ;  }
