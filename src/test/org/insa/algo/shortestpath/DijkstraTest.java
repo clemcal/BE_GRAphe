@@ -28,9 +28,9 @@ public class DijkstraTest {
 	
 	
 	
-	static DijkstraAlgorithm D, D2, D3, D4, D5, D6, D7, D8, D9, D10 ;
+	static DijkstraAlgorithm D, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10 ;
     static BellmanFordAlgorithm B, B2, B4, B5, B6, B7, B8, B9, B10 ;  
-    static AStarAlgorithm A, A2, A3, A4, A5, A6, A7, A8, A9, A10 ;
+    static AStarAlgorithm A, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10 ;
     
     
 	
@@ -62,7 +62,7 @@ public class DijkstraTest {
 		ShortestPathData data = new ShortestPathData(graph, graph.get(611),graph.get(134), arcInspectorDijkstra0);
 		B = new BellmanFordAlgorithm(data) ;
 		D = new DijkstraAlgorithm(data) ;
-		A = new AStarAlgorithm(data) ; 
+		A = new AStarAlgorithm(data) ;
 		//chemin infaisable
 		ShortestPathData data2 = new ShortestPathData(graph, graph.get(735),graph.get(331), arcInspectorDijkstra0);
 		D2 = new DijkstraAlgorithm(data2) ;
@@ -121,6 +121,27 @@ public class DijkstraTest {
     }
     
 
+// TESTS DE VALIDITE
+    
+    @Test
+    // chemin nul (origine=destination)
+    public void CheminVide() {
+    	assertTrue(D3.doRun().getPath().isEmpty());
+    }
+    
+    @Test
+    public void CheminValide() {
+    	assertTrue(B.doRun().getPath().isValid()) ;
+    }
+    
+ 
+    
+    
+    
+    
+    
+    
+// TESTS D'OPTIMALITE
     
     //pour le filtre 0 : distance et toutes les routes
     
@@ -137,13 +158,8 @@ public class DijkstraTest {
     public void CheminInfaisable() {
     	assertEquals(D2.doRun().getStatus(),B2.doRun().getStatus());
     }
+   
     
-    @Test
-    // chemin nul (origine=destination)
-    public void CheminVide() {
-    	Path p3 = D3.doRun().getPath();
-    	assertTrue(p3.isEmpty());
-    }
     
     
     @Test
@@ -172,7 +188,7 @@ public class DijkstraTest {
     @Test
     //carte non routière
     public void TempsNonRoutiere() {
-    	assertEquals(B8.doRun().getPath().getLength(), D8.doRun().getPath().getLength(), 0.01);
+    	assertEquals(B8.doRun().getPath().getMinimumTravelTime(), D8.doRun().getPath().getMinimumTravelTime(), 0.01);
     }
     @Test
     //chemin le plus rapide
@@ -203,7 +219,23 @@ public class DijkstraTest {
  ---------------------------------------------------------------------------------------------------------------------*/
     
     
+ 
+// TESTS DE VALIDITE
     
+    @Test
+    // chemin nul (origine=destination)
+    public void CheminVideA() {
+    	assertTrue(A3.doRun().getPath().isEmpty());
+    }
+    
+    @Test
+    public void CheminValideA() {
+    	assertTrue(A.doRun().getPath().isValid()) ;
+    }
+    
+//TESTS OPTIMALITE       
+   
+   
 //pour le filtre 0 : distance et toutes les routes
     
     @Test
@@ -220,12 +252,6 @@ public class DijkstraTest {
     	assertEquals(A2.doRun().getStatus(),B2.doRun().getStatus());
     }
     
-    @Test
-    // chemin nul (origine=destination)
-    public void CheminVideA() {
-    	Path p3 = A3.doRun().getPath();
-    	assertTrue(p3.isEmpty());
-    }
     
     
     @Test
@@ -254,7 +280,7 @@ public class DijkstraTest {
     @Test
     //carte non routière
     public void TempsNonRoutiereA() {
-    	assertEquals(B8.doRun().getPath().getLength(), A8.doRun().getPath().getLength(), 0.01);
+    	assertEquals(B8.doRun().getPath().getMinimumTravelTime(), A8.doRun().getPath().getMinimumTravelTime(), 0.01);
     }
     @Test
     //chemin le plus rapide

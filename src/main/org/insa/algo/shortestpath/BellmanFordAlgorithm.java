@@ -14,11 +14,11 @@ public class BellmanFordAlgorithm extends ShortestPathAlgorithm {
 
     public BellmanFordAlgorithm(ShortestPathData data) {
         super(data);
+        
     }
 
     @Override
     protected ShortestPathSolution doRun() {
-
         // Retrieve the graph.
         ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
@@ -42,6 +42,7 @@ public class BellmanFordAlgorithm extends ShortestPathAlgorithm {
         for (int i = 0; !found && i < nbNodes; ++i) {
             found = true;
             for (Node node: graph.getNodes()) {
+            	 
                 for (Arc arc: node.getSuccessors()) {
 
                     // Small test to check allowed roads...
@@ -93,7 +94,7 @@ public class BellmanFordAlgorithm extends ShortestPathAlgorithm {
             // Create the final solution.
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
         }
-
+        
         return solution;
     }
 

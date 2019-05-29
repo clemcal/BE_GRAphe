@@ -14,11 +14,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
-        this.nombreNodesMarquees = 0 ;
     }
-    
-
-    
     
 
     @Override
@@ -26,7 +22,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     	boolean trouve = false ; 
         ShortestPathData data = getInputData();
         ShortestPathSolution solution = null;
-//        ArrayList<Label> tabLabel = new ArrayList<Label>(); 
         ArrayList<Label> tabLabel = new ArrayList<Label>(data.getGraph().size()); 
         BinaryHeap<Label> tas = new BinaryHeap<Label>() ; 
         this.nombreNodesMarquees = 0 ;
@@ -38,7 +33,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
        }
       
       Label origine = newLabel(data.getOrigin().getId(),false,0,null,false,data) ; 
-//        
+       
         tabLabel.set(data.getOrigin().getId(), origine) ;
         notifyOriginProcessed(data.getOrigin());
         
@@ -50,12 +45,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	 
         	
         	Label actuelle = tas.deleteMin() ; 
-//        	System.out.println("tab "+ actuelle.getCost()); 
-//        	System.out.println("tab2 "+ actuelle.getTotalCost()); 
         	actuelle.setMark(true) ; 
         	notifyNodeMarked(data.getGraph().get(actuelle.getSom()));
         	this.nombreNodesMarquees +=1 ;
-//        	tabLabel.add(actuelle) ; 
         
           if (actuelle.getSom() == data.getDestination().getId()) {
           trouve = true ; 
@@ -65,7 +57,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
           
           Node actu = data.getGraph().get(actuelle.getSom()) ; 
           Iterator <Arc> arc = actu.getSuccessors().iterator();
+         
           while (arc.hasNext()) {
+        	  
             Arc arcIter = arc.next() ;
             Node succes = arcIter.getDestination();
             Label labSucces = tabLabel.get(succes.getId()) ;
@@ -92,7 +86,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                   labSucces.setinTas(true) ;
                 }
                 labSucces.setCost(actuelle.getCost() + data.getCost(arcIter)) ;
-                //System.out.println(labSucces.getCost());
                 labSucces.setPere(arcIter);
                 tas.insert(labSucces) ; //comme ça il est dans ajouté au bon endroit
               }
@@ -100,11 +93,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             
             }
           }
+          
         }
 
         // Destination has no predecessor, the solution is infeasible...
         if (tabLabel.get(data.getDestination().getId()) == null) {
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+
         }
         else {
 
